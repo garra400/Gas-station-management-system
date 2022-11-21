@@ -237,6 +237,7 @@ int main(void) {
     case 5:
       printf("\n%sexibindo quantidade de carros na lista de espera: %d%s\n\n",Blue, carro, White);
       for (int i = carro - 1; i >= 0; i--) {
+        printf("%s%d° Carro%s\n",Green,i+1, White);
         printf("%sAno do carro: %d%s\n", Blue,espera[i].ano, White);
         printf("%scor: %s%s\n", Green, espera[i].cor, White);
         printf("%sModelo do carro: %s%s\n", Red, espera[i].modelo, White);
@@ -257,6 +258,7 @@ int main(void) {
           break;
         case 'c':
           for (int i = cont - 1; i >= 0; i--) {
+            printf("%s%d° Carro%s\n",Green,i+1, White);
             printf("%sAno do carro: %d%s\n", Blue,atendidos[i].ano, White);
             printf("%scor: %s%s\n", Green, atendidos[i].cor, White);
             printf("%sModelo do carro: %s%s\n", Red, atendidos[i].modelo, White);
