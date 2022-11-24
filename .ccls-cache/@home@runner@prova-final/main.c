@@ -259,6 +259,7 @@ int main(void) {
         case 'c':
           for (int i = cont - 1; i >= 0; i--) {
             printf("%s%d° Carro%s\n",Green,i+1, White);
+            printf("%s%d° Carro%s\n",Green,i+1, White);
             printf("%sAno do carro: %d%s\n", Blue,atendidos[i].ano, White);
             printf("%scor: %s%s\n", Green, atendidos[i].cor, White);
             printf("%sModelo do carro: %s%s\n", Red, atendidos[i].modelo, White);

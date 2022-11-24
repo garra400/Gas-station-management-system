@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 struct Tcarro {
   int ano;
@@ -9,14 +10,112 @@ struct Tcarro {
 };
 
 // cores
+#define Black "\033[030m"
 #define Red "\033[031m"
 #define Green "\033[032m"
-#define Yellow "\033[032m"
-#define Blue "\033[34m"
+#define Yellow "\033[033m"
+#define Blue "\033[034m"
+#define Purple "\033[035m"
+#define Cyan "\033[036m"
 #define White "\033[0m"
+#define Gray "\033[090m"
+#define BrightRed "\033[091m"
+#define BrightGreen "\033[092m"
+#define BrightYellow "\033[093m"
+#define BrightBlue "\033[094m"
+#define Brightmagenta "\033[095m"
+#define BrightCyan "\033[096m"
+#define BrightWhite "\033[097m"
 
 // subrotinas
 void limpar() { system("clear"); }
+
+char cores(struct Tcarro corg, char *cor1[10]){
+  printf("%c",corg.cor);
+  if (corg.cor == "preto"){
+    *cor1 = "\033[030m";
+    printf("\033[030mcor: %s\033[0m\n", corg.cor);
+  }
+  else{
+    if (corg.cor == "vermelho"){
+      *cor1 = "\033[031m";
+      printf("\033[031mcor: %s\033[0m\n", corg.cor);
+    }
+    else{
+      if (corg.cor == "verde"){
+        *cor1 = "\033[032m";
+        printf("\033[032mcor: %s\033[0m\n", corg.cor);
+      }
+      else{
+        if (corg.cor == "amarela"){
+          *cor1 = "\033[033m";
+          printf("\033[033mcor: %s\033[0m\n", corg.cor);
+        }
+        else{
+          if (corg.cor == "azul"){
+            *cor1 = "\033[034m";
+            printf("\033[034mcor: %s\033[0m\n", corg.cor);
+          }
+          else{
+            if (corg.cor == "roxo" || corg.cor == "purpura"){
+              *cor1 = "\033[035m";
+              printf("\033[035mcor: %s\033[0m\n", corg.cor);
+            }
+            else{
+              if (corg.cor == "ciano"){
+                *cor1 = "\033[036m";
+                printf("\033[036mcor: %s\033[0m\n", corg.cor);
+              }
+              else{
+                if (corg.cor == "cinza"){
+                  *cor1 = "\033[090m";
+                  printf("\033[090mcor: %s\033[0m\n", corg.cor);
+                }      
+                else{
+                  if (corg.cor == "vermelho claro"){
+                    *cor1 = "\033[091m";
+                    printf("\033[091mcor: %s\033[0m\n", corg.cor);
+                  }
+                  else{
+                    if (corg.cor == "verde claro"){
+                      *cor1 = "\033[092m";
+                      printf("\033[092mcor: %s\033[0m\n", corg.cor);
+                    }
+                    else{
+                      if (corg.cor == "amarela claro"){
+                        *cor1 = "\033[093m";
+                        printf("\033[093mcor: %s\033[0m\n", corg.cor);
+                      }
+                      else{
+                        if (corg.cor == "azul claro"){
+                          *cor1 = "\033[094m";
+                          printf("\033[094mcor: %s\033[0m\n", corg.cor);
+                        }
+                        else{
+                          if (corg.cor == "roxo claro" || corg.cor == "purpura claro"){
+                              *cor1 = "\033[095m";
+                            printf("\033[095mcor: %s\033[0m\n", corg.cor);
+                          }
+                          else{
+                            if (corg.cor == "ciano claro"){
+                              *cor1 = "\033[096m";
+                              printf("\033[096mcor: %s\033[0m\n", corg.cor);
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } 
+        }
+      }
+    }
+  }                  
+  return *cor1;
+}
 
 void calibragem(int calibrar, int opc, int *contc, int *carro) {
   printf("Informe a pressão em libras para a calibragem: ");
@@ -141,7 +240,7 @@ void escreveTcarro(struct Tcarro *atendidos, int *cont, int *i) {
 int main(void) {
   FILE *arquivo;
   int capacidade, opcao, carro, abastecidos, cont, contc, calibrar, opc, i;
-  char relatorio;
+  char relatorio, cor1[20], cor2[10];
   float combustivel, litros_vendidos, valor, combustivel_vendido, venda;
   carro = 0;cont = 0;i = 0;combustivel = 200;litros_vendidos = 0;contc = 0;
   arquivo = fopen("arquivo.txt", "w");
@@ -177,7 +276,6 @@ int main(void) {
   //leitura da fila de espera
   struct Tcarro *espera;
   espera = (struct Tcarro*)malloc((capacidade + 1) * sizeof(struct Tcarro));
-  
   printf("\n");
   system("clear");
   printf("O valor do Combustível de hoje é de %s%.2fR$%s e o posto de gasolina "
@@ -239,7 +337,8 @@ int main(void) {
       for (int i = carro - 1; i >= 0; i--) {
         printf("%s%d° Carro%s\n",Green,i+1, White);
         printf("%sAno do carro: %d%s\n", Blue,espera[i].ano, White);
-        printf("%scor: %s%s\n", Green, espera[i].cor, White);
+        cores(espera[i], cor1);
+        printf("%coi",cor1);
         printf("%sModelo do carro: %s%s\n", Red, espera[i].modelo, White);
         printf("\n\n");
       }
@@ -258,6 +357,7 @@ int main(void) {
           break;
         case 'c':
           for (int i = cont - 1; i >= 0; i--) {
+            printf("%s%d° Carro%s\n",Green,i+1, White);
             printf("%s%d° Carro%s\n",Green,i+1, White);
             printf("%sAno do carro: %d%s\n", Blue,atendidos[i].ano, White);
             printf("%scor: %s%s\n", Green, atendidos[i].cor, White);
