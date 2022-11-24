@@ -159,16 +159,16 @@ void calibragem(int calibrar, int opc, int *contc, int *carro) {
 }
 
 void menu(int *opcao) {
-  printf("              Bem vindo ao Menu            \n\n");
-  printf("Selecione a opção que deseja através dos números\n\n");
-  printf("[1] - Adicionar um carro na fila\n");
-  printf("[2] - Abastecimento  \n");
-  printf("[3] - Retirar um carro da fila \n");
-  printf("[4] - Calibrar Pneus \n");
-  printf("[5] - Exibir carros na fila de espera \n");
-  printf("[6] - Relatórios \n");
-  printf("[7] - Encerrar  \n\n");
-  printf("Opção selecionada: ");
+  printf("%s              Bem vindo ao Menu            %s\n\n",Cyan, White);
+  printf("%sSelecione a opção que deseja através dos números%s\n\n", Cyan, White);
+  printf("%s[1] - Adicionar um carro na fila%s\n", Gray, White);
+  printf("%s[2] - Abastecimento  %s\n", Gray, White);
+  printf("%s[3] - Retirar um carro da fila %s\n", Gray, White);
+  printf("%s[4] - Calibrar Pneus %s\n", Gray, White);
+  printf("%s[5] - Exibir carros na fila de espera %s\n", Gray, White);
+  printf("%s[6] - Relatórios %s\n",Gray, White);
+  printf("%s[7] - Encerrar  %s\n\n", Gray, White);
+  printf("%sOpção selecionada: %s",Cyan, White);
   scanf("%d", &*opcao);
   printf("\n\n\n");
   system("clear");
@@ -177,15 +177,15 @@ void menu(int *opcao) {
 void menuf(char *relatorio) {
   fflush(stdin);
   __fpurge(stdin);
-  printf("Selecione a opção que deseja através das letras\n\n");
-  printf("[a] - Quantidade de litros vendida\n");
-  printf("[b] - Valor total arrecadado com as vendas  \n");
-  printf("[c] - Quantidade de carros atendidos \n");
-  printf("[d] - Quantidade de combustível restante no tanque \n");
-  printf("[e] - Gerar arquivo para impressão  \n");
-  printf("[f] - voltar ao menu anterior.  \n\n");
+  printf("%sSelecione a opção que deseja através das letras%s\n\n",Cyan, White);
+  printf("%s[a] - Quantidade de litros vendida%s\n",Gray, White);
+  printf("%s[b] - Valor total arrecadado com as vendas %s\n",Gray,White);
+  printf("%s[c] - Quantidade de carros atendidos %s\n",Gray,White);
+  printf("%s[d] - Quantidade de combustível restante no tanque %s\n",Gray,White);
+  printf("%s[e] - Gerar arquivo para impressão  %s\n",Gray,White);
+  printf("%s[f] - voltar ao menu anterior.  %s\n\n",Gray,White);
 
-  printf("Opção selecionada: ");
+  printf("%sOpção selecionada: %s",Cyan,White);
   scanf("%c", &*relatorio);
 }
 
@@ -244,9 +244,9 @@ int main(void) {
   // espera = maloc(sizeof(struct Tcarro));
   // atendidos = maloc(sizeof(struct Tcarro));
   printf("              Autor: João Victor Dos Santos Gomes\n\n");
-  printf("Esse programa é responsavel por solicitar ao usuario um valor do "
-         "combustivel e \ntambem o tamanho da fila que o estabelecimento "
-         "suportará através de um menu interativo \n\n\n");
+  printf("Esse programa é responsável por simular um programa de abastecimento de um posto "
+         "de combustivel e \ntambem o gerenciamento de fila de carros do estabelecimento. "
+         "sendo realizados através de um menu interativo \n\n\n");
 
   printf("informe o valor do combustível: ");
   scanf("%f", &valor);
@@ -327,10 +327,10 @@ int main(void) {
     case 5:
       printf("\n%sexibindo quantidade de carros na lista de espera: %d%s\n\n",Blue, carro, White);
       for (int i = carro - 1; i >= 0; i--) {
-        printf("%s%d° Carro%s\n",Green,i+1, White);
-        printf("%sAno do carro: %d%s\n", Blue,espera[i].ano, White);
+        printf("%s%d° Carro%s\n",Cyan,i+1, White);
+        printf("%sAno do carro: %d%s\n", Cyan,espera[i].ano, White);
         cores(espera[i]);
-        printf("%sModelo do carro: %s%s\n", Red, espera[i].modelo, White);
+        printf("%sModelo do carro: %s%s\n", Cyan, espera[i].modelo, White);
         printf("\n\n");
       }
       break;
@@ -348,10 +348,10 @@ int main(void) {
           break;
         case 'c':
           for (int i = cont - 1; i >= 0; i--) {
-            printf("%s%d° Carro%s\n",Green,i+1, White);
-            printf("%sAno do carro: %d%s\n", Blue,atendidos[i].ano, White);
+            printf("%s%d° Carro%s\n",Cyan,i+1, White);
+            printf("%sAno do carro: %d%s\n", Cyan,atendidos[i].ano, White);
             cores(atendidos[i]);
-            printf("%sModelo do carro: %s%s\n", Red, atendidos[i].modelo, White);
+            printf("%sModelo do carro: %s%s\n", Cyan, atendidos[i].modelo, White);
             printf("\n\n");
           }
           printf("%sForam atendidos %s%d%s carros%s\n", Blue, Green,cont, Blue, White);
