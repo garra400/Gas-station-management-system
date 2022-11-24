@@ -30,76 +30,69 @@ struct Tcarro {
 // subrotinas
 void limpar() { system("clear"); }
 
-char cores(struct Tcarro corg, char *cor1[10]){
-  printf("%c",corg.cor);
-  if (corg.cor == "preto"){
-    *cor1 = "\033[030m";
-    printf("\033[030mcor: %s\033[0m\n", corg.cor);
+void cores(struct Tcarro espera){
+  if (strcmp(espera.cor, "preto") == 0){
+    printf("\033[030mcor: %s\033[0m\n", espera.cor);
   }
   else{
-    if (corg.cor == "vermelho"){
-      *cor1 = "\033[031m";
-      printf("\033[031mcor: %s\033[0m\n", corg.cor);
+    if (strcmp(espera.cor, "vermelho") == 0){
+      printf("\033[031mcor: %s\033[0m\n", espera.cor);
     }
-    else{
-      if (corg.cor == "verde"){
-        *cor1 = "\033[032m";
-        printf("\033[032mcor: %s\033[0m\n", corg.cor);
+     else{
+      if (strcmp(espera.cor, "verde") == 0){
+         printf("\033[032mcor: %s\033[0m\n", espera.cor);
       }
       else{
-        if (corg.cor == "amarela"){
-          *cor1 = "\033[033m";
-          printf("\033[033mcor: %s\033[0m\n", corg.cor);
+        if (strcmp(espera.cor, "amarela") == 0){
+          printf("\033[033mcor: %s\033[0m\n", espera.cor);
         }
         else{
-          if (corg.cor == "azul"){
-            *cor1 = "\033[034m";
-            printf("\033[034mcor: %s\033[0m\n", corg.cor);
-          }
-          else{
-            if (corg.cor == "roxo" || corg.cor == "purpura"){
-              *cor1 = "\033[035m";
-              printf("\033[035mcor: %s\033[0m\n", corg.cor);
+          if (strcmp(espera.cor, "azul") == 0){     
+            printf("\033[034mcor: %s\033[0m\n", espera.cor);
             }
-            else{
-              if (corg.cor == "ciano"){
-                *cor1 = "\033[036m";
-                printf("\033[036mcor: %s\033[0m\n", corg.cor);
+          else{
+            if (strcmp(espera.cor, "roxo") == 0){
+              printf("\033[035mcor: %s\033[0m\n", espera.cor);
+            }
+            else{           
+              if (strcmp(espera.cor, "ciano") == 0){
+                 printf("\033[036mcor: %s\033[0m\n", espera.cor);
               }
               else{
-                if (corg.cor == "cinza"){
-                  *cor1 = "\033[090m";
-                  printf("\033[090mcor: %s\033[0m\n", corg.cor);
-                }      
+                if (strcmp(espera.cor, "cinza") == 0){
+                  printf("\033[090mcor: %s\033[0m\n", espera.cor);
+                }
                 else{
-                  if (corg.cor == "vermelho claro"){
-                    *cor1 = "\033[091m";
-                    printf("\033[091mcor: %s\033[0m\n", corg.cor);
-                  }
+                  if (strcmp(espera.cor, "prata") == 0){
+                    printf("\033[090mcor: %s\033[0m\n", espera.cor);
+                  }                 
                   else{
-                    if (corg.cor == "verde claro"){
-                      *cor1 = "\033[092m";
-                      printf("\033[092mcor: %s\033[0m\n", corg.cor);
+                   if (strcmp(espera.cor, "vermelho claro") == 0){
+                      printf("\033[091mcor: %s\033[0m\n", espera.cor);
                     }
                     else{
-                      if (corg.cor == "amarela claro"){
-                        *cor1 = "\033[093m";
-                        printf("\033[093mcor: %s\033[0m\n", corg.cor);
+                      if (strcmp(espera.cor, "verde claro") == 0){
+                        printf("\033[092mcor: %s\033[0m\n", espera.cor);
                       }
                       else{
-                        if (corg.cor == "azul claro"){
-                          *cor1 = "\033[094m";
-                          printf("\033[094mcor: %s\033[0m\n", corg.cor);
+                        if (strcmp(espera.cor, "amarelo claro") == 0){     
+                          printf("\033[093mcor: %s\033[0m\n", espera.cor);
                         }
                         else{
-                          if (corg.cor == "roxo claro" || corg.cor == "purpura claro"){
-                              *cor1 = "\033[095m";
-                            printf("\033[095mcor: %s\033[0m\n", corg.cor);
+                          if (strcmp(espera.cor, "azul claro") == 0){    
+                            printf("\033[094mcor: %s\033[0m\n", espera.cor);
                           }
-                          else{
-                            if (corg.cor == "ciano claro"){
-                              *cor1 = "\033[096m";
-                              printf("\033[096mcor: %s\033[0m\n", corg.cor);
+                           else{
+                            if (strcmp(espera.cor, "roxo claro") == 0){
+                              printf("\033[095mcor: %s\033[0m\n", espera.cor);
+                            }
+                            else{
+                              if (strcmp(espera.cor, "ciano claro") == 0){
+                                printf("\033[096mcor: %s\033[0m\n", espera.cor);
+                              }
+                              else{
+                                printf("\033[0mcor: %s\033[0m\n", espera.cor);
+                              }
                             }
                           }
                         }
@@ -113,8 +106,7 @@ char cores(struct Tcarro corg, char *cor1[10]){
         }
       }
     }
-  }                  
-  return *cor1;
+  }  
 }
 
 void calibragem(int calibrar, int opc, int *contc, int *carro) {
@@ -337,8 +329,7 @@ int main(void) {
       for (int i = carro - 1; i >= 0; i--) {
         printf("%s%d° Carro%s\n",Green,i+1, White);
         printf("%sAno do carro: %d%s\n", Blue,espera[i].ano, White);
-        cores(espera[i], cor1);
-        printf("%coi",cor1);
+        cores(espera[i]);
         printf("%sModelo do carro: %s%s\n", Red, espera[i].modelo, White);
         printf("\n\n");
       }
@@ -358,9 +349,8 @@ int main(void) {
         case 'c':
           for (int i = cont - 1; i >= 0; i--) {
             printf("%s%d° Carro%s\n",Green,i+1, White);
-            printf("%s%d° Carro%s\n",Green,i+1, White);
             printf("%sAno do carro: %d%s\n", Blue,atendidos[i].ano, White);
-            printf("%scor: %s%s\n", Green, atendidos[i].cor, White);
+            cores(atendidos[i]);
             printf("%sModelo do carro: %s%s\n", Red, atendidos[i].modelo, White);
             printf("\n\n");
           }
