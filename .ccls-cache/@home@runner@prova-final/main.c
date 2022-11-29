@@ -9,6 +9,14 @@ struct Tcarro {
   char cor[20];
 };
 
+struct Trodas {
+  int roda1;
+  int roda2;
+  int roda3;
+  int roda4;
+  int libras;
+};
+
 // cores
 #define Black "\033[030m"
 #define Red "\033[031m"
@@ -214,11 +222,16 @@ int abastecer(int *carro, float *combustivel, int valor,
         *carro = *carro - 1;
         return 0;
       } else {
-        printf(
+        if (*combustivel_vendido < 0){
+          printf("%sValor para solicitado para abastecer menor que zero!%s\n\n",Red,White);
+        }
+        else{
+          printf(
             "\n%sQuantidade de combustível no tanque insuficiente para "
-            "abastecer%s \n\n Quantidade de Combustivel disponivel: %s%.2f%s\n",
+            "abastecer%s \n\n Quantidade de Combustivel disponivel: %s%.2f%s\n\n",
             Red, White, Blue, *combustivel, White);
-        printf("%sO seu carro retornou a fila,Tente novamente o processo%s\n",
+        }
+        printf("%sO seu carro retornou a fila,Tente novamente o processo%s\n\n",
                Blue, White);
         return 0;
       }
