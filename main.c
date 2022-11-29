@@ -170,6 +170,10 @@ void menu(int *opcao) {
   printf("%s[7] - Encerrar  %s\n\n", Gray, White);
   printf("%sOpção selecionada: %s",Cyan, White);
   scanf("%d", &*opcao);
+  if (*opcao < 1 || *opcao > 7){
+    printf("Opção inválida! digite novamente: ");
+    scanf("%d", &*opcao);
+  }
   printf("\n\n\n");
   system("clear");
 }
@@ -189,7 +193,7 @@ void menuf(char *relatorio) {
   scanf("%c", &*relatorio);
 }
 
-void abastecer(int *carro, float *combustivel, int valor,
+int abastecer(int *carro, float *combustivel, int valor,
                float *combustivel_vendido, float *litros_vendidos, int *cont) {
   printf("Quantidade de litros restante: %s%.2f%s\n", Blue, *combustivel,
          White);
@@ -197,16 +201,18 @@ void abastecer(int *carro, float *combustivel, int valor,
   scanf("%f", &*combustivel_vendido);
   system("clear");
   if (*carro > 0) {
-    if (*combustivel_vendido <= *combustivel) {
+    if (*combustivel_vendido <= *combustivel && *combustivel_vendido > 0) {
       *litros_vendidos = *litros_vendidos + *combustivel_vendido;
       *combustivel = *combustivel - *combustivel_vendido;
       printf("\n%sCarro abastecido%s\n", Blue, White);
       *carro = *carro - 1;
+      return 1;
     } else {
       if (*combustivel == 0) {
         printf("%sTanque vazio%s\n", Red, White);
         printf("%sAbastacimento não realizado\n%s", Red, White);
         *carro = *carro - 1;
+        return 0;
       } else {
         printf(
             "\n%sQuantidade de combustível no tanque insuficiente para "
@@ -214,6 +220,7 @@ void abastecer(int *carro, float *combustivel, int valor,
             Red, White, Blue, *combustivel, White);
         printf("%sO seu carro retornou a fila,Tente novamente o processo%s\n",
                Blue, White);
+        return 0;
       }
     }
   } else {
@@ -239,7 +246,7 @@ int main(void) {
   if (arquivo == NULL){
     printf("Erro ao abrir o arquivo.\n");
   }
-  struct Tcarro *atendidos;
+  struct Tcarro *atendidos; 
   atendidos = (struct Tcarro*)malloc((cont + 1) * sizeof(struct Tcarro));
   // espera = maloc(sizeof(struct Tcarro));
   // atendidos = maloc(sizeof(struct Tcarro));
@@ -267,7 +274,7 @@ int main(void) {
   }
   //leitura da fila de espera
   struct Tcarro *espera;
-  espera = (struct Tcarro*)malloc((capacidade + 1) * sizeof(struct Tcarro));
+  espera = (struct Tcarro*)malloc((capacidade) * sizeof(struct Tcarro));
   printf("\n");
   system("clear");
   printf("O valor do Combustível de hoje é de %s%.2fR$%s e o posto de gasolina "
@@ -302,13 +309,14 @@ int main(void) {
         break;
       }
     case 2:
-      atendidos[cont] = espera[00];
-      for (int i = 0; i <= carro; i++) {
-        espera[i] = espera[i + 1];
-      }
-      cont++;
-      abastecer(&carro, &combustivel, valor, &combustivel_vendido, &litros_vendidos, &cont);
-      atendidos = (struct Tcarro*)realloc(atendidos, (cont + 2) * sizeof(struct Tcarro));
+      if (abastecer(&carro, &combustivel, valor, &combustivel_vendido, &litros_vendidos, &cont) == 1){
+        atendidos[cont] = espera[0];
+        for (int i = 0; i < carro; i++) {
+          espera[i] = espera[i + 1];
+        }
+        cont++;
+        atendidos = (struct Tcarro*)realloc(atendidos, (cont + 2) * sizeof(struct Tcarro));
+      }      
       break;
     case 3:
       if (carro > 0) {
