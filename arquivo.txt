@@ -1,0 +1,18 @@
+Foram vendidos 130.00 litros
+
+O valor total arrecadado com as vendas foi de 650.00 R$
+
+Foram atendidos 2 carros
+
+Ano do carro: 2005
+cor: verde
+Modelo do carro: sandeiro
+
+
+Ano do carro: 2003
+cor: preto
+Modelo do carro: corsa
+
+
+restam 70.00 litros de combustivel no tanque
+

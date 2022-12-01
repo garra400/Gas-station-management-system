@@ -9,14 +9,6 @@ struct Tcarro {
   char cor[20];
 };
 
-struct Trodas {
-  int roda1;
-  int roda2;
-  int roda3;
-  int roda4;
-  int libras;
-};
-
 // cores
 #define Black "\033[030m"
 #define Red "\033[031m"
@@ -201,10 +193,8 @@ void menuf(char *relatorio) {
   scanf("%c", &*relatorio);
 }
 
-int abastecer(int *carro, float *combustivel, int valor,
-               float *combustivel_vendido, float *litros_vendidos, int *cont) {
-  printf("Quantidade de litros restante: %s%.2f%s\n", Blue, *combustivel,
-         White);
+int abastecer(int *carro, float *combustivel, int valor,float *combustivel_vendido, float *litros_vendidos, int *cont) {
+  printf("Quantidade de litros restante: %s%.2f%s\n", Blue, *combustivel,White);
   printf("informe a quantidade de combustivel a ser abastecida: ");
   scanf("%f", &*combustivel_vendido);
   system("clear");
@@ -222,22 +212,18 @@ int abastecer(int *carro, float *combustivel, int valor,
         *carro = *carro - 1;
         return 0;
       } else {
-        if (*combustivel_vendido < 0){
-          printf("%sValor para solicitado para abastecer menor que zero!%s\n\n",Red,White);
-        }
-        else{
-          printf(
+        printf(
             "\n%sQuantidade de combustível no tanque insuficiente para "
-            "abastecer%s \n\n Quantidade de Combustivel disponivel: %s%.2f%s\n\n",
+            "abastecer%s \n\n Quantidade de Combustivel disponivel: %s%.2f%s\n",
             Red, White, Blue, *combustivel, White);
-        }
-        printf("%sO seu carro retornou a fila,Tente novamente o processo%s\n\n",
+        printf("%sO seu carro retornou a fila,Tente novamente o processo%s\n",
                Blue, White);
         return 0;
       }
     }
   } else {
     printf("Não há carros na fila");
+    return 0;
   }
 }
 void escreveTcarro(struct Tcarro *atendidos, int *cont, int *i) {
@@ -255,7 +241,6 @@ int main(void) {
   char relatorio, cor1[20], cor2[10];
   float combustivel, litros_vendidos, valor, combustivel_vendido, venda;
   carro = 0;cont = 0;i = 0;combustivel = 200;litros_vendidos = 0;contc = 0;
-  arquivo = fopen("arquivo.txt", "w");
   if (arquivo == NULL){
     printf("Erro ao abrir o arquivo.\n");
   }
@@ -327,8 +312,8 @@ int main(void) {
         for (int i = 0; i < carro; i++) {
           espera[i] = espera[i + 1];
         }
-        cont++;
-        atendidos = (struct Tcarro*)realloc(atendidos, (cont + 2) * sizeof(struct Tcarro));
+        cont = cont + 1;
+        atendidos = (struct Tcarro*)realloc(atendidos, (cont + 1) * sizeof(struct Tcarro));
       }      
       break;
     case 3:
@@ -381,6 +366,7 @@ int main(void) {
           printf("restam %.2f litros de combustivel no tanque\n\n",combustivel);
           break;
         case 'e':
+          arquivo = fopen("arquivo.txt", "w");
           printf("gerando arquivo para impressão\n");
           fprintf(arquivo,"Foram vendidos %.2f litros\n\n", litros_vendidos);
           fprintf(arquivo, "O valor total arrecadado com as vendas foi de %.2f R$\n\n", litros_vendidos * valor);
